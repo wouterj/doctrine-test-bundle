@@ -6,7 +6,7 @@ It provides a `StaticDriver` that will wrap your originally configured `Driver` 
 
 With the help of a PHPUnit listener class it will begin a transaction before every testcase and roll it back again after the test finished for all configured DBAL connections. This results in a performance boost as there is no need to rebuild the schema, import a backup SQL dump or re-insert fixtures before every testcase. As long as you avoid issuing queries that result in implicit transaction commits (Like `ALTER TABLE`, `DROP TABLE` etc) your tests will be isolated and all see the same database state.
 
-Also it includes a `StaticArrayCache` that can be automatically configured as meta data & query cache for all EntityManagers. This improved the speed and memory usage for my testsuites dramatically!
+Also it includes a `StaticArrayCache` that can be automatically configured as meta data & query cache for all EntityManagers. This improved the speed and memory usage for my testsuites dramatically! This is especially beneficial if you have a lot of Controller tests (`WebTestCase`).
 
 ### How to install and use this Bundle?
 
