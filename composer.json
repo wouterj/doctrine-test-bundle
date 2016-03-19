@@ -1,0 +1,22 @@
+{
+  "name": "dama/doctrine-test-bundle",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "David Maicher",
+      "email": "mail@dmaicher.de"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.0",
+    "symfony/symfony": "~2.3",
+    "doctrine/doctrine-bundle": "~1.4",
+    "phpunit/phpunit": "~4.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "DAMA\\DoctrineTestBundle\\": "src/DAMA/DoctrineTestBundle"
+    }
+  }
+}
