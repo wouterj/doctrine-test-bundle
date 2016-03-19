@@ -12,8 +12,8 @@ Also it includes a `StaticArrayCache` that can be automatically configured as me
 
 1. install via composer
 
-    ```json
-    ...
+    ```sh
+    composer require dama/doctrine-test-bundle
     ```
 
 2. Enable the bundle for your test environment in your `AppKernel.php`
