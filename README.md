@@ -1,4 +1,6 @@
-### What is it?
+
+
+### What is it? ![build image](https://travis-ci.org/dmaicher/doctrine-test-bundle.svg?branch=master)
 
 This bundle provides features that help you running your symfony2 testsuite more efficiently with isolated tests.
 
