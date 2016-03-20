@@ -85,18 +85,34 @@ class DoctrineTestCompilerPassTest extends \PHPUnit_Framework_TestCase
             )
         ;
 
-        $def = new Definition(StaticArrayCache::class);
-
         $containerBuilder
             ->expects($this->exactly(6))
             ->method('setDefinition')
             ->withConsecutive(
-                ['doctrine.orm.a_metadata_cache', $def],
-                ['doctrine.orm.b_metadata_cache', $def],
-                ['doctrine.orm.c_metadata_cache', $def],
-                ['doctrine.orm.a_query_cache', $def],
-                ['doctrine.orm.b_query_cache', $def],
-                ['doctrine.orm.c_query_cache', $def]
+                [
+                    'doctrine.orm.a_metadata_cache',
+                    (new Definition(StaticArrayCache::class))->addMethodCall('setNamespace', [sha1('doctrine.orm.a_metadata_cache')])
+                ],
+                [
+                    'doctrine.orm.b_metadata_cache',
+                    (new Definition(StaticArrayCache::class))->addMethodCall('setNamespace', [sha1('doctrine.orm.b_metadata_cache')])
+                ],
+                [
+                    'doctrine.orm.c_metadata_cache',
+                    (new Definition(StaticArrayCache::class))->addMethodCall('setNamespace', [sha1('doctrine.orm.c_metadata_cache')])
+                ],
+                [
+                    'doctrine.orm.a_query_cache',
+                    (new Definition(StaticArrayCache::class))->addMethodCall('setNamespace', [sha1('doctrine.orm.a_query_cache')])
+                ],
+                [
+                    'doctrine.orm.b_query_cache',
+                    (new Definition(StaticArrayCache::class))->addMethodCall('setNamespace', [sha1('doctrine.orm.b_query_cache')])
+                ],
+                [
+                    'doctrine.orm.c_query_cache',
+                    (new Definition(StaticArrayCache::class))->addMethodCall('setNamespace', [sha1('doctrine.orm.c_query_cache')])
+                ]
             )
         ;
 

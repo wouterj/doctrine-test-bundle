@@ -41,7 +41,9 @@ class DoctrineTestCompilerPass implements CompilerPassInterface
                 if ($container->hasAlias($cacheServiceId)) {
                     $container->removeAlias($cacheServiceId);
                 }
-                $container->setDefinition($cacheServiceId, new Definition(StaticArrayCache::class));
+                $cache = new Definition(StaticArrayCache::class);
+                $cache->addMethodCall('setNamespace', [sha1($cacheServiceId)]); //make sure we have no key collisions
+                $container->setDefinition($cacheServiceId, $cache);
             }
         }
     }
