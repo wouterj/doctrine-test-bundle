@@ -1,0 +1,7 @@
+<phpunit bootstrap="../vendor/autoload.php" colors="true">
+    <testsuites>
+        <testsuite name="DAMADoctrineTestBundle test suite">
+            <directory suffix="Test.php">./src</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

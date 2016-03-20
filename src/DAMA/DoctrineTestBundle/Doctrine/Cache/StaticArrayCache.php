@@ -9,7 +9,7 @@ class StaticArrayCache extends CacheProvider
     /**
      * @var array
      */
-    private static $data = array();
+    private static $data = [];
 
     /**
      * {@inheritdoc}
@@ -53,7 +53,7 @@ class StaticArrayCache extends CacheProvider
      */
     protected function doFlush()
     {
-        self::$data = array();
+        self::$data = [];
 
         return true;
     }

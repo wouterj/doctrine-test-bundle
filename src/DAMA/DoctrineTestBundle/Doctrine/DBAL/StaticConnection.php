@@ -28,11 +28,7 @@ class StaticConnection implements Connection
     }
 
     /**
-     * Prepares a statement for execution and returns a Statement object.
-     *
-     * @param string $prepareString
-     *
-     * @return \Doctrine\DBAL\Driver\Statement
+     * {@inheritdoc}
      */
     public function prepare($prepareString)
     {
@@ -40,9 +36,7 @@ class StaticConnection implements Connection
     }
 
     /**
-     * Executes an SQL statement, returning a result set as a Statement object.
-     *
-     * @return \Doctrine\DBAL\Driver\Statement
+     * {@inheritdoc}
      */
     public function query()
     {
@@ -50,12 +44,7 @@ class StaticConnection implements Connection
     }
 
     /**
-     * Quotes a string for use in a query.
-     *
-     * @param string $input
-     * @param int    $type
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function quote($input, $type = \PDO::PARAM_STR)
     {
@@ -63,11 +52,7 @@ class StaticConnection implements Connection
     }
 
     /**
-     * Executes an SQL statement and return the number of affected rows.
-     *
-     * @param string $statement
-     *
-     * @return int
+     * {@inheritdoc}
      */
     public function exec($statement)
     {
@@ -75,11 +60,7 @@ class StaticConnection implements Connection
     }
 
     /**
-     * Returns the ID of the last inserted row or sequence value.
-     *
-     * @param string|null $name
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function lastInsertId($name = null)
     {
@@ -87,9 +68,7 @@ class StaticConnection implements Connection
     }
 
     /**
-     * Initiates a transaction.
-     *
-     * @return bool TRUE on success or FALSE on failure.
+     * {@inheritdoc}
      */
     public function beginTransaction()
     {
@@ -101,9 +80,7 @@ class StaticConnection implements Connection
     }
 
     /**
-     * Commits a transaction.
-     *
-     * @return bool TRUE on success or FALSE on failure.
+     * {@inheritdoc}
      */
     public function commit()
     {
@@ -111,9 +88,7 @@ class StaticConnection implements Connection
     }
 
     /**
-     * Rolls back the current transaction, as initiated by beginTransaction().
-     *
-     * @return bool TRUE on success or FALSE on failure.
+     * {@inheritdoc}
      */
     public function rollBack()
     {
@@ -121,9 +96,7 @@ class StaticConnection implements Connection
     }
 
     /**
-     * Returns the error code associated with the last operation on the database handle.
-     *
-     * @return string|null The error code, or null if no operation has been run on the database handle.
+     * {@inheritdoc}
      */
     public function errorCode()
     {
@@ -131,12 +104,18 @@ class StaticConnection implements Connection
     }
 
     /**
-     * Returns extended error information associated with the last operation on the database handle.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function errorInfo()
     {
         return $this->connection->errorInfo();
+    }
+
+    /**
+     * @return Connection
+     */
+    public function getWrappedConnection()
+    {
+        return $this->connection;
     }
 }

@@ -33,8 +33,10 @@ class DoctrineTestCompilerPass implements CompilerPassInterface
             $cacheNames[] = 'doctrine.orm.%s_query_cache';
         }
 
+        $connectionNames = array_keys($container->getParameter('doctrine.connections'));
+
         foreach ($cacheNames as $cacheName) {
-            foreach (array_keys($container->getParameter('doctrine.connections')) as $name) {
+            foreach ($connectionNames as $name) {
                 $cacheServiceId = sprintf($cacheName, $name);
                 if ($container->hasAlias($cacheServiceId)) {
                     $container->removeAlias($cacheServiceId);

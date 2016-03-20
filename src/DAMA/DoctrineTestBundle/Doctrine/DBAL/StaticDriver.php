@@ -86,10 +86,7 @@ class StaticDriver implements Driver
     {
         return $this->underlyingDriver->getDatabase($conn);
     }
-
-    /**
-     * begin transaction for all static connections.
-     */
+    
     public static function beginTransaction()
     {
         foreach (self::$connections as $con) {
@@ -101,9 +98,6 @@ class StaticDriver implements Driver
         }
     }
 
-    /**
-     * roll back transaction for all static connections.
-     */
     public static function rollBack()
     {
         foreach (self::$connections as $con) {
