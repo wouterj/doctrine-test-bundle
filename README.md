@@ -24,7 +24,7 @@ Also it includes a `StaticArrayCache` that can be automatically configured as me
     if (in_array($env, ['dev', 'test'])) {
         ...
         if ($env === 'test') {
-            $bundles[] = new \DAMA\DoctrineTestBundle\DMDoctrineTestBundle();
+            $bundles[] = new DAMA\DoctrineTestBundle\DAMADoctrineTestBundle();
         }
     }
     ```
