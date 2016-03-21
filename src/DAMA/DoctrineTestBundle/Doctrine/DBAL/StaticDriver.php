@@ -4,8 +4,10 @@ namespace DAMA\DoctrineTestBundle\Doctrine\DBAL;
 
 use Doctrine\DBAL\Driver;
 use Doctrine\DBAL\Driver\Connection;
+use Doctrine\DBAL\Driver\DriverException;
+use Doctrine\DBAL\Driver\ExceptionConverterDriver;
 
-class StaticDriver implements Driver
+class StaticDriver implements Driver, ExceptionConverterDriver
 {
     /**
      * @var Connection[]
@@ -86,7 +88,19 @@ class StaticDriver implements Driver
     {
         return $this->underlyingDriver->getDatabase($conn);
     }
-    
+
+    /**
+     * {@inheritdoc}
+     */
+    public function convertException($message, DriverException $exception)
+    {
+        if ($this->underlyingDriver instanceof ExceptionConverterDriver) {
+            return $this->underlyingDriver->convertException($message, $exception);
+        }
+
+        return $exception;
+    }
+
     public static function beginTransaction()
     {
         foreach (self::$connections as $con) {
