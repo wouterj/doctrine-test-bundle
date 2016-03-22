@@ -6,8 +6,9 @@ use Doctrine\DBAL\Driver;
 use Doctrine\DBAL\Driver\Connection;
 use Doctrine\DBAL\Driver\DriverException;
 use Doctrine\DBAL\Driver\ExceptionConverterDriver;
+use Doctrine\DBAL\VersionAwarePlatformDriver;
 
-class StaticDriver implements Driver, ExceptionConverterDriver
+class StaticDriver implements Driver, ExceptionConverterDriver, VersionAwarePlatformDriver
 {
     /**
      * @var Connection[]
@@ -101,6 +102,42 @@ class StaticDriver implements Driver, ExceptionConverterDriver
         return $exception;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function createDatabasePlatformForVersion($version)
+    {
+        if ($this->underlyingDriver instanceof VersionAwarePlatformDriver) {
+            return $this->underlyingDriver->createDatabasePlatformForVersion($version);
+        }
+
+        return $this->getDatabasePlatform();
+    }
+
+    /**
+     * @param $keepStaticConnections bool
+     */
+    public static function setKeepStaticConnections($keepStaticConnections)
+    {
+        self::$keepStaticConnections = $keepStaticConnections;
+    }
+
+    /**
+     * @return bool
+     */
+    public static function isKeepStaticConnections()
+    {
+        return self::$keepStaticConnections;
+    }
+
+    /**
+     * @param string $underlyingDriverClass
+     */
+    public static function setUnderlyingDriverClass($underlyingDriverClass)
+    {
+        self::$underlyingDriverClass = $underlyingDriverClass;
+    }
+
     public static function beginTransaction()
     {
         foreach (self::$connections as $con) {
@@ -124,21 +161,5 @@ class StaticDriver implements Driver, ExceptionConverterDriver
         foreach (self::$connections as $con) {
             $con->commit();
         }
-    }
-
-    /**
-     * @param $keepStaticConnections bool
-     */
-    public static function setKeepStaticConnections($keepStaticConnections)
-    {
-        self::$keepStaticConnections = $keepStaticConnections;
-    }
-
-    /**
-     * @param string $underlyingDriverClass
-     */
-    public static function setUnderlyingDriverClass($underlyingDriverClass)
-    {
-        self::$underlyingDriverClass = $underlyingDriverClass;
     }
 }

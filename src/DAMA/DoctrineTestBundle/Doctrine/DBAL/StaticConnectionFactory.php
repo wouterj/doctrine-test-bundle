@@ -31,9 +31,11 @@ class StaticConnectionFactory extends ConnectionFactory
         $params['driverClass'] = StaticDriver::class;
         $connection = parent::createConnection($params, $config, $eventManager, $mappingTypes);
 
-        // The underlying connection already has a transaction started.
-        // So we start it as well on this connection so the internal state ($_transactionNestingLevel) is in sync with the underlying connection.
-        $connection->beginTransaction();
+        if (StaticDriver::isKeepStaticConnections()) {
+            // The underlying connection already has a transaction started.
+            // So we start it as well on this connection so the internal state ($_transactionNestingLevel) is in sync with the underlying connection.
+            $connection->beginTransaction();
+        }
 
         return $connection;
     }

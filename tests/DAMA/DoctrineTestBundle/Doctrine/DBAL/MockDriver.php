@@ -30,7 +30,7 @@ class MockDriver implements Driver
      */
     public function connect(array $params, $username = null, $password = null, array $driverOptions = array())
     {
-        return $this->getMock(Connection::class);
+        return $this->getMock(Driver\Connection::class);
     }
 
     /**
