@@ -91,27 +91,27 @@ class DoctrineTestCompilerPassTest extends \PHPUnit_Framework_TestCase
             ->withConsecutive(
                 [
                     'doctrine.orm.a_metadata_cache',
-                    (new Definition(StaticArrayCache::class))->addMethodCall('setNamespace', [sha1('doctrine.orm.a_metadata_cache')])
+                    (new Definition(StaticArrayCache::class))->addMethodCall('setNamespace', [sha1('doctrine.orm.a_metadata_cache')]),
                 ],
                 [
                     'doctrine.orm.b_metadata_cache',
-                    (new Definition(StaticArrayCache::class))->addMethodCall('setNamespace', [sha1('doctrine.orm.b_metadata_cache')])
+                    (new Definition(StaticArrayCache::class))->addMethodCall('setNamespace', [sha1('doctrine.orm.b_metadata_cache')]),
                 ],
                 [
                     'doctrine.orm.c_metadata_cache',
-                    (new Definition(StaticArrayCache::class))->addMethodCall('setNamespace', [sha1('doctrine.orm.c_metadata_cache')])
+                    (new Definition(StaticArrayCache::class))->addMethodCall('setNamespace', [sha1('doctrine.orm.c_metadata_cache')]),
                 ],
                 [
                     'doctrine.orm.a_query_cache',
-                    (new Definition(StaticArrayCache::class))->addMethodCall('setNamespace', [sha1('doctrine.orm.a_query_cache')])
+                    (new Definition(StaticArrayCache::class))->addMethodCall('setNamespace', [sha1('doctrine.orm.a_query_cache')]),
                 ],
                 [
                     'doctrine.orm.b_query_cache',
-                    (new Definition(StaticArrayCache::class))->addMethodCall('setNamespace', [sha1('doctrine.orm.b_query_cache')])
+                    (new Definition(StaticArrayCache::class))->addMethodCall('setNamespace', [sha1('doctrine.orm.b_query_cache')]),
                 ],
                 [
                     'doctrine.orm.c_query_cache',
-                    (new Definition(StaticArrayCache::class))->addMethodCall('setNamespace', [sha1('doctrine.orm.c_query_cache')])
+                    (new Definition(StaticArrayCache::class))->addMethodCall('setNamespace', [sha1('doctrine.orm.c_query_cache')]),
                 ]
             )
         ;
