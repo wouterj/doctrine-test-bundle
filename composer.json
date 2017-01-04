@@ -1,7 +1,7 @@
 {
   "name": "dama/doctrine-test-bundle",
-  "description": "Symfony2 bundle to isolate doctrine database tests and improve performance",
-  "keywords": ["symfony2", "doctrine", "tests", "isolation", "performance"],
+  "description": "Symfony 2/3 bundle to isolate doctrine database tests and improve test performance",
+  "keywords": ["symfony", "symfony 2", "symfony 3", "doctrine", "tests", "isolation", "performance"],
   "type": "library",
   "license": "MIT",
   "authors": [
