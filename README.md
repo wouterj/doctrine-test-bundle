@@ -33,7 +33,7 @@ Also it includes a `StaticArrayCache` that can be automatically configured as me
 
     ```xml
     <listeners>
-        <listener class="\DAMA\DoctrineTestBundle\PHPUnit\PHPUnitStaticDbConnectionListener" file="../vendor/dama/doctrine-test-bundle/src/DAMA/DoctrineTestBundle/PHPUnit/PHPUnitStaticDbConnectionListener.php" />
+        <listener class="\DAMA\DoctrineTestBundle\PHPUnit\PHPUnitStaticDbConnectionListener" />
     </listeners>
     ```
     
