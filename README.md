@@ -14,9 +14,16 @@ Also it includes a `StaticArrayCache` that can be automatically configured as me
 
 1. install via composer
 
+    If you are using PHPUnit < 6:    
     ```sh
-    composer require --dev dama/doctrine-test-bundle
+    composer require --dev dama/doctrine-test-bundle "^1.0"
     ```
+    
+    If you are using PHPUnit >= 6:
+     ```sh
+    composer require --dev dama/doctrine-test-bundle "^2.0"
+    ```
+    
 
 2. Enable the bundle for your test environment in your `AppKernel.php`
 
