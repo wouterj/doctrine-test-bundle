@@ -39,9 +39,12 @@ Also it includes a `StaticArrayCache` that can be automatically configured as me
 3. Add the PHPUnit test listener in your xml config (e.g. `app/phpunit.xml`)
 
     ```xml
-    <listeners>
-        <listener class="\DAMA\DoctrineTestBundle\PHPUnit\PHPUnitStaticDbConnectionListener" />
-    </listeners>
+    <phpunit>
+        ...
+        <listeners>
+            <listener class="\DAMA\DoctrineTestBundle\PHPUnit\PHPUnitStaticDbConnectionListener" />
+        </listeners>
+    </phpunit>
     ```
     
 ### Configuration
