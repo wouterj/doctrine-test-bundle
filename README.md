@@ -46,6 +46,8 @@ Also it includes a `StaticArrayCache` that can be automatically configured as me
         </listeners>
     </phpunit>
     ```
+
+4. That's it! From now on whatever changes you do to the database within each single testcase (be it a `WebTestCase` or a `KernelTestCase` or any custom test) are automatically rolled back for you :blush:
     
 ### Configuration
 
