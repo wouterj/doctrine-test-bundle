@@ -7,7 +7,7 @@ use PHPUnit\Framework\BaseTestListener;
 use PHPUnit\Framework\Test;
 use PHPUnit\Framework\TestSuite;
 
-class PHPUnitStaticDbConnectionListener extends BaseTestListener
+class PHPUnitListener extends BaseTestListener
 {
     /**
      * @param Test $test
