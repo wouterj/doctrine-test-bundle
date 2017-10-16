@@ -3,6 +3,9 @@ cache:
   directories:
     - $HOME/.composer/cache/files
 
+services:
+  - mysql
+
 php:
   - '5.6'
   - '7.0'
@@ -25,6 +28,8 @@ install:
   - composer require symfony/symfony:${SYMFONY_VERSION:-"3.3.*"}
 
 script: 
+  - cp tests/Functional/parameters.yml.dist tests/Functional/parameters.yml
+  - rm -rf tests/Functional/cache
   - if [[ $TEST_COVERAGE ]]; then phpdbg -qrr vendor/bin/phpunit -c tests/ --coverage-clover ./build/logs/clover.xml; else vendor/bin/phpunit -c tests/ tests/; fi
 
 after_success:
