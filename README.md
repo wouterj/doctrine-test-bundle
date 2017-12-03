@@ -36,6 +36,8 @@ It also includes a `StaticArrayCache` that will be automatically configured as m
     }
     ```
     
+    Note: if you are using symfony flex and you are allowing contrib recipes (`extra.symfony.allow-contrib=true`) then the bundle will be automatically enabled for the `'test'` environment. See https://github.com/symfony/recipes-contrib/tree/master/dama/doctrine-test-bundle
+    
 3. Add the PHPUnit test listener in your xml config (e.g. `app/phpunit.xml`) 
 
     ```xml
