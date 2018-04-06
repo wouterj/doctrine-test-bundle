@@ -63,6 +63,28 @@ dama_doctrine_test:
   enable_static_meta_data_cache: true
   enable_static_query_cache: true
 ```
+
+### Example
+
+An example usage can be seen within the functional tests included in this bundle: https://github.com/dmaicher/doctrine-test-bundle/tree/master/tests
+
+- initial dabatase bootstrap is done using phpunit bootstrap file: https://github.com/dmaicher/doctrine-test-bundle/blob/master/tests/phpunit.bootstrap.php
+- several tests that make sure any changes from previous tests are rolled back: https://github.com/dmaicher/doctrine-test-bundle/blob/master/tests/Functional/FunctionalTest.php
+
+
+### Debugging 
+
+Sometimes it can be useful to be able to debug the database contents when a test failed. As normally all changes are rolled back automatically you can do this manually:
+
+```php
+public function testMyTestCaseThatINeedToDebug()
+{
+    // ... something thats changes the DB state
+    DAMA\DoctrineTestBundle\Doctrine\DBAL\StaticDriver::commit();
+    die;
+    // now the DB changes are actually persisted and you can debug them
+}
+```
     
 [Last stable image]: https://poser.pugx.org/dama/doctrine-test-bundle/version.svg
 [Last unstable image]: https://poser.pugx.org/dama/doctrine-test-bundle/v/unstable.svg
