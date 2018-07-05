@@ -6,13 +6,13 @@
 [![Coverage Status][Master coverage image]][Master scrutinizer link]
 [![Scrutinizer][Master scrutinizer image]][Master scrutinizer link]
 
-### What is it? 
+### What does it do? :) 
 
 This bundle provides features that help you run your Symfony-framework-based App's testsuite more efficiently with isolated tests.
 
 It provides a `StaticDriver` that will wrap your originally configured `Driver` class (like `DBAL\Driver\PDOMysql\Driver`) and keeps a database connection statically in the current php process.
 
-With the help of a PHPUnit listener class it will begin a transaction before every testcase and roll it back again after the test finished for all configured DBAL connections. This results in a performance boost as there is no need to rebuild the schema, import a backup SQL dump or re-insert fixtures before every testcase. As long as you avoid issuing queries that result in implicit transaction commits (Like `ALTER TABLE`, `DROP TABLE` etc) your tests will be isolated and all see the same database state.
+With the help of a PHPUnit listener class it will begin a transaction before every testcase and roll it back again after the test finished for all configured DBAL connections. This results in a performance boost as there is no need to rebuild the schema, import a backup SQL dump or re-insert fixtures before every testcase. As long as you avoid issuing DDL queries that might result in implicit transaction commits (Like `ALTER TABLE`, `DROP TABLE` etc; see https://wiki.postgresql.org/wiki/Transactional_DDL_in_PostgreSQL:_A_Competitive_Analysis) your tests will be isolated and all see the same database state.
 
 It also includes a `StaticArrayCache` that will be automatically configured as meta data & query cache for all EntityManagers. This improved the speed and memory usage for my testsuites dramatically! This is especially beneficial if you have a lot of tests that boot kernels (like Controller tests or ContainerAware tests) and use Doctrine entities.
 
