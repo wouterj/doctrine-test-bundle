@@ -99,6 +99,48 @@ public function testMyTestCaseThatINeedToDebug()
 }
 ```
 
+### Behat
+
+It is possible to use this bundle in a Behat test suite if scenarios are executed in the same process as Behat. This will not work if the Behat tests invoke the application via HTTP requests.
+
+To use the bundle follow the installation instructions and add the following methods to your `FeatureContext` class:
+
+```php
+    /**
+     * @BeforeSuite
+     */
+    public static function beforeSuite()
+    {
+        StaticDriver::setKeepStaticConnections(true);
+    }
+
+    /**
+     * @BeforeScenario
+     */
+    public function beforeScenario()
+    {
+        StaticDriver::beginTransaction();
+    }
+
+    /**
+     * @AfterScenario
+     */
+    public function afterScenario()
+    {
+        StaticDriver::rollBack();
+    }
+
+    /**
+     * @AfterSuite
+     */
+    public static function afterSuite()
+    {
+       StaticDriver::setKeepStaticConnections(false);
+    }
+```
+
+See [dmaicher/symfony-flex-behat-test](https://github.com/dmaicher/symfony-flex-behat-test) for a complete example.
+
 ### Troubleshooting
 
 In case you are running (maybe without knowing it) queries during your tests that are implicitly committing any open transaction 
