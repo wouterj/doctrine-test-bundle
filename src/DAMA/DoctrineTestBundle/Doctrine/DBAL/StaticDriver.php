@@ -8,6 +8,7 @@ use Doctrine\DBAL\Driver\Connection;
 use Doctrine\DBAL\Driver\DriverException;
 use Doctrine\DBAL\Driver\ExceptionConverterDriver;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use Doctrine\DBAL\VersionAwarePlatformDriver;
 
 class StaticDriver implements Driver, ExceptionConverterDriver, VersionAwarePlatformDriver
@@ -41,7 +42,7 @@ class StaticDriver implements Driver, ExceptionConverterDriver, VersionAwarePlat
     /**
      * {@inheritdoc}
      */
-    public function connect(array $params, $username = null, $password = null, array $driverOptions = [])
+    public function connect(array $params, $username = null, $password = null, array $driverOptions = []): Connection
     {
         if (self::$keepStaticConnections) {
             $key = sha1(serialize($params).$username.$password);
@@ -60,7 +61,7 @@ class StaticDriver implements Driver, ExceptionConverterDriver, VersionAwarePlat
     /**
      * {@inheritdoc}
      */
-    public function getDatabasePlatform()
+    public function getDatabasePlatform(): AbstractPlatform
     {
         return $this->platform;
     }
@@ -68,7 +69,7 @@ class StaticDriver implements Driver, ExceptionConverterDriver, VersionAwarePlat
     /**
      * {@inheritdoc}
      */
-    public function getSchemaManager(\Doctrine\DBAL\Connection $conn)
+    public function getSchemaManager(\Doctrine\DBAL\Connection $conn): AbstractSchemaManager
     {
         return $this->underlyingDriver->getSchemaManager($conn);
     }
@@ -76,7 +77,7 @@ class StaticDriver implements Driver, ExceptionConverterDriver, VersionAwarePlat
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->underlyingDriver->getName();
     }
@@ -84,7 +85,7 @@ class StaticDriver implements Driver, ExceptionConverterDriver, VersionAwarePlat
     /**
      * {@inheritdoc}
      */
-    public function getDatabase(\Doctrine\DBAL\Connection $conn)
+    public function getDatabase(\Doctrine\DBAL\Connection $conn): string
     {
         return $this->underlyingDriver->getDatabase($conn);
     }
@@ -92,7 +93,7 @@ class StaticDriver implements Driver, ExceptionConverterDriver, VersionAwarePlat
     /**
      * {@inheritdoc}
      */
-    public function convertException($message, DriverException $exception)
+    public function convertException($message, DriverException $exception): Exception\DriverException
     {
         if ($this->underlyingDriver instanceof ExceptionConverterDriver) {
             return $this->underlyingDriver->convertException($message, $exception);
@@ -104,7 +105,7 @@ class StaticDriver implements Driver, ExceptionConverterDriver, VersionAwarePlat
     /**
      * {@inheritdoc}
      */
-    public function createDatabasePlatformForVersion($version)
+    public function createDatabasePlatformForVersion($version): AbstractPlatform
     {
         return $this->platform;
     }
@@ -112,20 +113,17 @@ class StaticDriver implements Driver, ExceptionConverterDriver, VersionAwarePlat
     /**
      * @param bool $keepStaticConnections
      */
-    public static function setKeepStaticConnections($keepStaticConnections)
+    public static function setKeepStaticConnections($keepStaticConnections): void
     {
         self::$keepStaticConnections = $keepStaticConnections;
     }
 
-    /**
-     * @return bool
-     */
-    public static function isKeepStaticConnections()
+    public static function isKeepStaticConnections(): bool
     {
         return self::$keepStaticConnections;
     }
 
-    public static function beginTransaction()
+    public static function beginTransaction(): void
     {
         foreach (self::$connections as $con) {
             try {
@@ -136,14 +134,14 @@ class StaticDriver implements Driver, ExceptionConverterDriver, VersionAwarePlat
         }
     }
 
-    public static function rollBack()
+    public static function rollBack(): void
     {
         foreach (self::$connections as $con) {
             $con->rollBack();
         }
     }
 
-    public static function commit()
+    public static function commit(): void
     {
         foreach (self::$connections as $con) {
             $con->commit();

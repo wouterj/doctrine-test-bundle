@@ -11,11 +11,8 @@ class StaticConnectionFactoryTest extends TestCase
 {
     /**
      * @dataProvider createConnectionDataProvider
-     *
-     * @param bool $keepStaticConnections
-     * @param int  $expectedNestingLevel
      */
-    public function testCreateConnection($keepStaticConnections, $expectedNestingLevel)
+    public function testCreateConnection(bool $keepStaticConnections, int $expectedNestingLevel): void
     {
         $factory = new StaticConnectionFactory(new ConnectionFactory([]));
 
@@ -29,7 +26,7 @@ class StaticConnectionFactoryTest extends TestCase
         $this->assertSame($expectedNestingLevel, $connection->getTransactionNestingLevel());
     }
 
-    public function createConnectionDataProvider()
+    public function createConnectionDataProvider(): array
     {
         return [
             [false, 0],
