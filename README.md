@@ -37,7 +37,7 @@ It also includes a `StaticArrayCache` that will be automatically configured as m
     
     Note: if you are using symfony flex and you are allowing contrib recipes (`extra.symfony.allow-contrib=true`) then the bundle will be automatically enabled for the `'test'` environment. See https://github.com/symfony/recipes-contrib/tree/master/dama/doctrine-test-bundle
     
-3. Starting from PHPUnit version 8, add the extension in your xml config (e.g. `app/phpunit.xml`)
+3. For PHPUnit version >= 7.1 add the extension in your xml config (e.g. `app/phpunit.xml`)
 
     ```xml
     <phpunit>
@@ -48,7 +48,7 @@ It also includes a `StaticArrayCache` that will be automatically configured as m
     </phpunit>
     ```
 
-    For lower PHPUnit versions add the listener in your xml config (e.g. `app/phpunit.xml`) 
+    For PHPUnit version 7.0 add the listener in your xml config (e.g. `app/phpunit.xml`) 
 
     ```xml
     <phpunit>
