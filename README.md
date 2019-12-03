@@ -48,7 +48,7 @@ It also includes a `StaticArrayCache` that will be automatically configured as m
     </phpunit>
     ```
 
-    For PHPUnit version 7.0 until 7.4 add the listener in your xml config (e.g. `app/phpunit.xml`) 
+    For PHPUnit version 6.0 until 7.4 add the listener in your xml config (e.g. `app/phpunit.xml`) 
 
     ```xml
     <phpunit>
