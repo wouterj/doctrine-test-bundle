@@ -39,6 +39,7 @@ class BehatListener implements EventSubscriberInterface
 
     public function rollBack(): void
     {
+        var_dump('rollback!');
         StaticDriver::rollBack();
     }
 }

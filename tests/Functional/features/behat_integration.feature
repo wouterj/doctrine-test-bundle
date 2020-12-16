@@ -7,6 +7,12 @@ Feature:: Behat integration
     When I insert a new row
     Then there is 1 row
 
+  Scenario: Changing DB state
+    Given there are 0 rows
+    When I insert a new row
+    And an error is thrown
+    Then there are 0 rows
+
   Scenario: Change db state within rolled back transaction
     Given there are 0 rows
     When I begin a transaction

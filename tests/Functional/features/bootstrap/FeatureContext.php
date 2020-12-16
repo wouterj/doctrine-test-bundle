@@ -19,4 +19,12 @@ class FeatureContext implements Context
 
         (new Process([$php, __DIR__.'/../../../bootstrap.php']))->mustRun();
     }
+
+    /**
+     * @When an error is thrown
+     */
+    public function triggerError(): void
+    {
+        throw new \Exception();
+    }
 }
